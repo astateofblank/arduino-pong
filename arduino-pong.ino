@@ -17,7 +17,11 @@
 #include <Adafruit_SSD1306.h>
 
 //Define Pins
-#define OLED_RESET 4
+#define OLED_MOSI   9
+#define OLED_CLK   10
+#define OLED_DC    11
+#define OLED_CS    12
+#define OLED_RESET 13
 #define BEEPER 3
 #define CONTROL_A A0
 #define CONTROL_B A1
@@ -38,7 +42,7 @@
 
 
 //Define Variables
-Adafruit_SSD1306 display(OLED_RESET);
+Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 int paddleLocationA = 0;
 int paddleLocationB = 0;
@@ -58,7 +62,7 @@ int scoreB = 0;
 //Setup 
 void setup() 
 {
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3D);  // initialize with the I2C addr 0x3D (for the 128x64)
+  display.begin(SSD1306_SWITCHCAPVCC);  // initialize for SPI
   display.clearDisplay();   // clears the screen and buffer
   display.display();   
   display.setTextWrap(false);
